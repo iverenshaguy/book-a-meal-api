@@ -1,0 +1,70 @@
+{
+  "root": true,
+  "extends": [
+    "airbnb-base/legacy",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true,
+    "mocha": true,
+    "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {
+        "@server": "./packages/server",
+        "@client": "./packages/client"
+      }
+    }
+  },
+  "globals": {
+    "shallow": true,
+    "mount": true,
+    "expect": true,
+    "render": true,
+    "toJson": true,
+    "rrcMock": true,
+    "mocksdk": true
+  },
+  "rules": {
+    "one-var": 0,
+    "one-var-declaration-per-line": 0,
+    "new-cap": 0,
+    "consistent-return": 0,
+    "no-param-reassign": 0,
+    "comma-dangle": 0,
+    "import/named": 0,
+    "curly": ["error", "multi-line"],
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "no-shadow": [
+      "error",
+      {
+        "allow": ["req", "res", "err"]
+      }
+    ],
+    "valid-jsdoc": [
+      "error",
+      {
+        "requireReturn": true,
+        "requireReturnType": true,
+        "requireParamDescription": false,
+        "requireReturnDescription": true
+      }
+    ],
+    "require-jsdoc": [
+      "error",
+      {
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ClassDeclaration": true
+        }
+      }
+    ]
+  },
+  "parser": "babel-eslint"
+}
