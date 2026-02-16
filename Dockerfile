@@ -1,7 +1,7 @@
 # Book A Meal API - Express v1 (stable)
 # Build and run the current Express app for stable frontend deployment
 
-FROM node:12-alpine
+FROM node:16-alpine
 
 WORKDIR /app
 
