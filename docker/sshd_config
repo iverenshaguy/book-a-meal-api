@@ -1,0 +1,6 @@
+Port 2222
+PermitRootLogin no
+PasswordAuthentication yes
+PermitEmptyPasswords no
+PubkeyAuthentication yes
+PidFile /tmp/sshd.pid

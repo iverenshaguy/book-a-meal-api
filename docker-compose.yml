@@ -1,0 +1,61 @@
+# Book A Meal API - Docker Compose for local/staging
+#
+# Commands (see package.json):
+#   yarn docker:up         - Build and run from main (stable for frontend while developing)
+#   yarn docker:up:current - Build and run from your current branch
+#
+# With local Postgres: docker-compose up
+#   DATABASE_URL is auto-built from DB_USERNAME, DB_PASSWORD, DB_NAME (or set it in .env)
+#
+# With external DB (Heroku, RDS, etc.): docker-compose run --no-deps --service-ports api
+#   Set DATABASE_URL in .env to your external connection string
+#
+# Local URL for frontend: Run once (or as part of yarn setup:dev):
+#   yarn docker:setup  - add host entry + generate HTTPS certs
+# Then use https://api.book-a-meal.local
+#   http://api.book-a-meal.local:8000  (HTTP, optional)
+#
+# SSH into container: ssh -p 2222 app@localhost (password: app)
+
+services:
+  api:
+    build: .
+    hostname: api.book-a-meal.local
+    ports:
+      - "8000:8000"
+      - "2222:2222"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - PORT=8000
+      - DATABASE_URL=${DATABASE_URL:-postgresql://${DB_USERNAME:-postgres}:${DB_PASSWORD:-postgres}@postgres:5432/${DB_NAME:-book_a_meal_dev}}
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "443:443"
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile
+      - ./docker/certs:/etc/caddy/certs:ro
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-book_a_meal_dev}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
