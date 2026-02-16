@@ -26,3 +26,8 @@ lerna-debug.log*
 *.tsbuildinfo
 
 .coveralls.yml
+
+# Local HTTPS certs (mkcert)
+docker/certs/
+.idea/
+.cursor/
