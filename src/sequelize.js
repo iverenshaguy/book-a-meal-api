@@ -20,7 +20,28 @@ export const config = {
   logging: devMode ? log => log : false
 };
 
+// Sequelize CLI (migrations) expects env keys; models use url/config
 module.exports = {
+  development: {
+    use_env_variable: 'DATABASE_URL',
+    dialect: 'postgres',
+    logging: devMode
+  },
+  test: {
+    use_env_variable: 'DATABASE_TEST_URL',
+    dialect: 'postgres',
+    logging: false
+  },
+  staging: {
+    use_env_variable: 'DATABASE_URL',
+    dialect: 'postgres',
+    logging: devMode
+  },
+  production: {
+    use_env_variable: 'DATABASE_URL',
+    dialect: 'postgres',
+    logging: false
+  },
   url: databaseUrls[environment],
   config: {
     dialect: 'postgres',

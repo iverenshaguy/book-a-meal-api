@@ -1,17 +1,23 @@
 import { NestFactory } from '@nestjs/core';
 import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import { config } from 'dotenv';
-import * as helmet from 'helmet';
+import helmet from 'helmet';
 // import * as csurf from 'csurf';
 import * as rateLimit from 'express-rate-limit';
 
 import { AppModule } from './app/app.module';
+import type { NestExpressApplication } from '@nestjs/platform-express';
 
 config();
 
 async function bootstrap() {
-  // TODO: update cors options ot make app more secure
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: {
+      origin: [
+        /\.book-a-meal\.local$/,
+      ],
+    },
+  });
 
   app.use(helmet());
   // app.use(csurf());
