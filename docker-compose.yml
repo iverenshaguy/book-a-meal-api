@@ -29,9 +29,11 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - PORT=8000
-      - DATABASE_URL=${DATABASE_URL:-postgresql://${DB_USERNAME:-postgres}:${DB_PASSWORD:-postgres}@postgres:5432/${DB_NAME:-book_a_meal_dev}}
+      # Always use postgres host when running full stack (localhost in .env fails inside container)
+      - DATABASE_URL=postgresql://${DB_USERNAME:-postgres}:${DB_PASSWORD:-postgres}@postgres:5432/${DB_NAME:-book_a_meal_dev}
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     restart: unless-stopped
 
   caddy:
@@ -56,6 +58,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-postgres} -d ${DB_NAME:-book_a_meal_dev}"]
+      interval: 2s
+      timeout: 5s
+      retries: 10
 
 volumes:
   postgres_data:
