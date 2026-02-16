@@ -1,0 +1,4 @@
+api.book-a-meal.local {
+    tls /etc/caddy/certs/cert.pem /etc/caddy/certs/key.pem
+    reverse_proxy api:8000
+}

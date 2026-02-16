@@ -13,16 +13,16 @@ This serves the Book a Meal client application
 - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Development](#development)
+  - [Docker](#docker)
   - [Testing](#testing)
 - [Limitations](#limitations)
 - [Contributing Guide](#contributing-guide)
 - [FAQs](#faqs)
 - [License](#license)
 
-### Pivotal Tracker
+### Project management
 
-Project is currently being built with the Project Management Tool, Pivotal Tracker.
-You can find the template at [https://www.pivotaltracker.com/n/projects/2165637](https://www.pivotaltracker.com/n/projects/2165637)
+This project was previously managed with Pivotal Tracker. Pivotal Tracker has been discontinued; stories and planning will be tracked elsewhere.
 
 ### API Deployment
 
@@ -119,6 +119,63 @@ Version 1 can be found [here](https://github.com/iverenshaguy/book-a-meal/tree/v
 You can run `yarn start:dev` in development to use [Nodemon](https://nodemon.io/)
 
 [Nodemon](https://nodemon.io/) watches for file changes and restarts your server.
+
+For a full local environment (Node, DB, HTTPS), you can use `yarn setup:dev`, which installs dependencies, runs migrations, seeds (if needed), runs Docker setup (host + certs), and builds the project.
+
+### Docker
+
+You can run the API (and optional Postgres + Caddy) in Docker for local or staging use. The frontend can talk to the API at **https://api.book-a-meal.local** (or `http://api.book-a-meal.local:8000`).
+
+**Prerequisites:** [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/). For trusted local HTTPS (no browser warning), [mkcert](https://github.com/FiloSottile/mkcert) is optional (e.g. `brew install mkcert`).
+
+#### One-time setup
+
+Run once (or as part of `yarn setup:dev`):
+
+```bash
+yarn docker:setup
+```
+
+This will:
+
+- Add `api.book-a-meal.local` to `/etc/hosts` (requires **sudo**)
+- Generate HTTPS certs in `docker/certs/` (uses [mkcert](https://github.com/FiloSottile/mkcert) if installed, otherwise a self-signed cert; install mkcert for no browser warning: `brew install mkcert`)
+
+#### Running with Docker
+
+- **Current branch** (API built from your working branch):
+
+  ```bash
+  yarn docker:up:current
+  ```
+
+  Starts API (port 8000), Caddy (HTTPS on 443), and Postgres (5432). Use [https://api.book-a-meal.local](https://api.book-a-meal.local).
+
+- **Stable API from `master`** (e.g. while developing the frontend):
+
+  ```bash
+  yarn docker:up
+  ```
+
+  This checks out `master`, builds and runs the API from that branch, then restores your branch when you stop. It may stash and pop local changes.
+
+#### External database
+
+To use an existing database (e.g. Heroku, RDS), set `DATABASE_URL` in `.env` and run:
+
+```bash
+docker-compose run --no-deps --service-ports api
+```
+
+#### SSH into the container
+
+For debugging you can SSH into the API container:
+
+```bash
+ssh -p 2222 app@localhost
+```
+
+Password: `app` (change in production or use key-based auth).
 
 ### Testing
 
