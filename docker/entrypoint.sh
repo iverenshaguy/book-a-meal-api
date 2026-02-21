@@ -7,11 +7,19 @@ if [ -f /usr/sbin/sshd ]; then
   /usr/sbin/sshd -f /etc/ssh/sshd_config
 fi
 
+# DOCKER_NEW_DB=1: destroy DB (undo all migrations), remigrate, then run seeders
+# Otherwise: only run migrations (no seeders)
+if [ -n "$DOCKER_NEW_DB" ]; then
+  yarn sequelize-cli:es6 db:migrate:undo:all || true
+fi
+
 # Run migrations (uses DATABASE_URL from env, points at postgres service)
 yarn sequelize-cli:es6 db:migrate || true
 
-# Run seeders (creates default users: admin, caterers, customers)
-yarn sequelize-cli:es6 db:seed:all || true
+# Run seeders only when starting a fresh DB (--new flag)
+if [ -n "$DOCKER_NEW_DB" ]; then
+  yarn sequelize-cli:es6 db:seed:all || true
+fi
 
 # Start the API
 exec node ./dist/app.js

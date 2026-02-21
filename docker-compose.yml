@@ -1,8 +1,10 @@
 # Book A Meal API - Docker Compose for local/staging
 #
 # Commands (see package.json):
-#   yarn docker:up         - Build and run from main (stable for frontend while developing)
-#   yarn docker:up:current - Build and run from your current branch
+#   yarn docker:up           - Build and run from main; run migrations only (no seeders)
+#   yarn docker:up --new     - Same but destroy DB, remigrate, and run seeders
+#   yarn docker:up:current   - Build and run from your current branch (migrations only)
+#   yarn docker:up:current --new - Same from current branch with fresh DB + seeders
 #
 # With local Postgres: docker-compose up
 #   DATABASE_URL is auto-built from DB_USERNAME, DB_PASSWORD, DB_NAME (or set it in .env)
@@ -29,6 +31,8 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - PORT=8000
+      # Set when using yarn docker:up --new to destroy DB, remigrate, and run seeders
+      - DOCKER_NEW_DB=${DOCKER_NEW_DB:-}
       # Always use postgres host when running full stack (localhost in .env fails inside container)
       - DATABASE_URL=postgresql://${DB_USERNAME:-postgres}:${DB_PASSWORD:-postgres}@postgres:5432/${DB_NAME:-book_a_meal_dev}
     depends_on:
