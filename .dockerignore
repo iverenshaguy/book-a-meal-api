@@ -10,8 +10,8 @@ coverage
 *.log
 .vscode
 .idea
-v2
 tests
-docs
 *.md
 !README.md
+**/__tests__
+src/utils/test-utils

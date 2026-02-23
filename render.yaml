@@ -1,0 +1,73 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+#
+# First-time setup:
+#   1. Push this file to GitHub
+#   2. Go to https://dashboard.render.com/blueprints and connect your repo
+#   3. Set the required secrets in the Render dashboard for this service:
+#        DATABASE_URL   — your Neon connection string
+#                         e.g. postgresql://user:pass@host.neon.tech/db?sslmode=require
+#        SECRET         — long random string (openssl rand -hex 64)
+#        BASE_URL       — your Render service URL, e.g. https://book-a-meal-api.onrender.com
+#        EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASSWORD, PERSONAL_EMAIL
+#   4. Disable auto-deploy in the Render dashboard (we deploy via GitHub Actions after CI passes)
+#   5. Copy the Deploy Hook URL from the Render dashboard and save it as
+#      RENDER_DEPLOY_HOOK_URL in your GitHub repo secrets
+
+services:
+  - type: web
+    name: book-a-meal-api
+    runtime: node
+    region: oregon
+    plan: free
+
+    # --production=false ensures devDeps (babel-node, sequelize-cli) are available
+    # for the migration step in the start command
+    buildCommand: yarn install --frozen-lockfile --production=false && yarn build
+
+    # Migrations run once on each deploy before the app starts serving traffic
+    startCommand: yarn sequelize-cli:es6 db:migrate && node ./dist/app.js
+
+    healthCheckPath: /api/
+
+    # Deploys are triggered by GitHub Actions (after tests pass), not by git push
+    autoDeploy: false
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000          # Render's default port for web services
+
+      # Set these in the Render dashboard — never commit real values
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET
+        sync: false
+      - key: BASE_URL
+        sync: false
+      - key: EMAIL_HOST
+        sync: false
+      - key: EMAIL_PORT
+        sync: false
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: PERSONAL_EMAIL
+        sync: false
+
+      # Safe to set defaults here
+      - key: OPENING_HOUR
+        value: 12
+      - key: OPENING_MINUTE
+        value: 30
+      - key: CLOSING_HOUR
+        value: 17
+      - key: CLOSING_MINUTE
+        value: 00
+      - key: EXPIRY
+        value: 800000
+      - key: TZ
+        value: UTC
+      - key: PGTZ
+        value: UTC
