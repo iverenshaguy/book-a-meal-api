@@ -7,7 +7,7 @@ import { tokens } from 'src/utils/test-utils/setup';
 import unAuthorized from 'src/utils/test-utils/unAuthorized';
 import request from 'supertest';
 
-const { emiolaToken, foodCircleToken } = tokens;
+const { jidennaToken, foodCircleToken } = tokens;
 
 const { newOrderDetails } = mockData;
 
@@ -18,7 +18,7 @@ describe('Order Routes: Deliver an Order', () => {
     request(app)
       .post('/orders')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send(newOrderDetails)
       .end((err, res) => {
         firstOrderId = res.body.id;
@@ -34,7 +34,7 @@ describe('Order Routes: Deliver an Order', () => {
     request(app)
       .post('/orders')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send(newOrderDetails)
       .end((err, res) => {
         secondOrderId = res.body.id;

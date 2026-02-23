@@ -8,7 +8,7 @@ import {
 import { tokens } from 'src/utils/test-utils/setup';
 import request from 'supertest';
 
-const { foodCircleToken, emiolaToken } = tokens;
+const { foodCircleToken, jidennaToken } = tokens;
 const { menuDetailsWithoutDate } = mockData;
 
 describe('Menu Routes: Get the menu specific day', () => {
@@ -30,7 +30,7 @@ describe('Menu Routes: Get the menu specific day', () => {
     request(app)
       .get('/menu')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .end((err, res) => {
         expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty('menu');
@@ -44,7 +44,7 @@ describe('Menu Routes: Get the menu specific day', () => {
     request(app)
       .get('/menu?search=fish')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .end((err, res) => {
         expect(res.statusCode).toBe(200);
         expect(res.body.menu.meals.length).toBe(1);
@@ -130,7 +130,7 @@ describe('Menu Routes: Get the menu specific day', () => {
       request(app)
         .get('/menu')
         .set('Accept', 'application/json')
-        .set('authorization', emiolaToken)
+        .set('authorization', jidennaToken)
         .end((err, res) => {
           expect(res.statusCode).toBe(200);
           expect(res.body.menu.meals.length).toBe(0);

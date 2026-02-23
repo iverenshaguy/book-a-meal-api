@@ -5,7 +5,7 @@ import {
 } from 'src/utils/test-utils/setup';
 import Authorization from 'src/middlewares/Authorization';
 
-const { emiolaToken, foodCircleToken } = tokens;
+const { jidennaToken, foodCircleToken } = tokens;
 
 // mock server response
 const res = {
@@ -33,7 +33,7 @@ describe('Authorization Handler', () => {
     });
 
     it("should send error 403 for forbidden user ie user that's not admin", () => {
-      const forbReq = { role: 'user', headers: { authorization: emiolaToken } };
+      const forbReq = { role: 'user', headers: { authorization: jidennaToken } };
       const authorization = new Authorization('caterer');
       authorization.authorizeRole(forbReq, res, next);
 
@@ -68,7 +68,7 @@ describe('Authorization Handler', () => {
     });
 
     it('should call next for authenticated user', () => {
-      const authReq = { role: 'user', headers: { authorization: emiolaToken } };
+      const authReq = { role: 'user', headers: { authorization: jidennaToken } };
       const authorization = new Authorization('user');
       authorization.authorizeRole(authReq, res, next);
 

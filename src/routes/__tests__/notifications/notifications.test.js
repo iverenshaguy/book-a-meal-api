@@ -2,7 +2,7 @@ import app from 'src/app';
 import { tokens } from 'src/utils/test-utils/setup';
 import request from 'supertest';
 
-const { foodCircleToken, emiolaToken } = tokens;
+const { foodCircleToken, jidennaToken } = tokens;
 
 describe('Notifications: Get Notifications', () => {
   it("should get all caterer's notifications", (done) => {
@@ -26,7 +26,7 @@ describe('Notifications: Get Notifications', () => {
     request(app)
       .get('/notifications')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .end((err, res) => {
         expect(res.statusCode).toBe(200);
         expect(res.body.notifications.length).toBe(3);

@@ -5,7 +5,7 @@ import { tokens } from 'src/utils/test-utils/setup';
 import unAuthorized from 'src/utils/test-utils/unAuthorized';
 import request from 'supertest';
 
-const { foodCircleToken, emiolaToken, fakeUserToken } = tokens;
+const { foodCircleToken, jidennaToken, fakeUserToken } = tokens;
 const { newOrderDetails } = mockData;
 
 describe('Order Routes: Get All Orders', () => {
@@ -13,7 +13,7 @@ describe('Order Routes: Get All Orders', () => {
     request(app)
       .post('/orders')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send({ ...newOrderDetails })
       .end((err, res) => {
         db.Order.findOne({ where: { orderId: res.body.id } }).then((order) =>
@@ -179,7 +179,7 @@ describe('Order Routes: Get All Orders', () => {
       request(app)
         .get('/orders')
         .set('Accept', 'application/json')
-        .set('authorization', emiolaToken)
+        .set('authorization', jidennaToken)
         .end((err, res) => {
           expect(res.statusCode).toBe(200);
           expect(res.body.orders.length).toBe(4);
@@ -193,7 +193,7 @@ describe('Order Routes: Get All Orders', () => {
       request(app)
         .get('/orders?date=2018-04-06')
         .set('Accept', 'application/json')
-        .set('authorization', emiolaToken)
+        .set('authorization', jidennaToken)
         .end((err, res) => {
           expect(res.statusCode).toBe(200);
           expect(res.body.orders.length).toBe(1);
@@ -210,7 +210,7 @@ describe('Order Routes: Get All Orders', () => {
       request(app)
         .get('/orders/fb097bde-5959-45ff-8e21-51184fa60c25')
         .set('Accept', 'application/json')
-        .set('authorization', emiolaToken)
+        .set('authorization', jidennaToken)
         .end((err, res) => {
           expect(res.statusCode).toBe(200);
           expect(res.body.id).toBe('fb097bde-5959-45ff-8e21-51184fa60c25');
@@ -225,7 +225,7 @@ describe('Order Routes: Get All Orders', () => {
       request(app)
         .get('/orders/fb097bde-5959-45ff-8e21-51184fa60c22')
         .set('Accept', 'application/json')
-        .set('authorization', emiolaToken)
+        .set('authorization', jidennaToken)
         .end((err, res) => {
           expect(res.statusCode).toBe(404);
           expect(res.body.error).toBe('Item Not Found');
