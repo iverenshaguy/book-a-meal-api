@@ -23,8 +23,9 @@ describe('Order Routes: Add an Order', () => {
         expect(res.statusCode).toBe(201);
         expect(res.body).toHaveProperty('id');
         expect(res.body.meals.length).toBe(2);
-        expect(res.body.meals[0].quantity).toBe(2);
-        expect(res.body.meals[0]).toHaveProperty('price');
+        const meal = res.body.meals.find(m => m.id === 'baa0412a-d167-4d2b-b1d8-404cb8f02631');
+        expect(meal.quantity).toBe(2);
+        expect(meal).toHaveProperty('price');
 
         if (err) return done(err);
         done();
