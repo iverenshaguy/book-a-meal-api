@@ -1,0 +1,20 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - release/**
+
+jobs:
+  test:
+    name: Test
+    uses: ./.github/workflows/ci.yml
+
+  deploy:
+    name: Deploy to Render
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Trigger Render deploy hook
+        run: curl -f "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
