@@ -33,7 +33,7 @@ COPY --from=builder /app/node_modules ./node_modules
 # Copy compiled app and runtime-required configs
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/config ./config
-COPY package.json yarn.lock babel.config.json ./
+COPY package.json yarn.lock babel.config.js ./
 
 COPY docker/entrypoint.prod.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh && chown -R app:appgroup /app /entrypoint.sh

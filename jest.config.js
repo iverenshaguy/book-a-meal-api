@@ -16,7 +16,7 @@ module.exports = {
   transform: {
     '^.+\\.(js|jsx|mjs)$': [
       'babel-jest',
-      { configFile: path.join(__dirname, 'babel.config.json') },
+      { configFile: path.join(__dirname, 'babel.config.js') },
     ],
   },
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs)$'],
