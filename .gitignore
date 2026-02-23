@@ -4,6 +4,7 @@
 .gitattributes
 .nyc_output
 .env
+.env.test
 .vs
 .selenium
 
@@ -31,3 +32,5 @@ lerna-debug.log*
 docker/certs/
 .idea/
 .cursor/
+.claude/
+/claude/
