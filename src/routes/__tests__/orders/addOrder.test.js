@@ -6,7 +6,7 @@ import { tokens } from 'src/utils/test-utils/setup';
 import unAuthorized from 'src/utils/test-utils/unAuthorized';
 import request from 'supertest';
 
-const { emiolaToken } = tokens;
+const { jidennaToken } = tokens;
 
 const { badOrderDetails, newOrderDetails } = mockData;
 
@@ -17,7 +17,7 @@ describe('Order Routes: Add an Order', () => {
     request(app)
       .post('/orders')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send({ ...newOrderDetails })
       .end((err, res) => {
         expect(res.statusCode).toBe(201);
@@ -41,7 +41,7 @@ describe('Order Routes: Add an Order', () => {
     request(app)
       .post('/orders')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send(newOrderDetails)
       .end((err, res) => {
         expect(res.statusCode).toBe(200);
@@ -58,7 +58,7 @@ describe('Order Routes: Add an Order', () => {
     request(app)
       .post('/orders')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send({
         meals: [
           { mealId: '46ced7aa-eed5-4462-b2c0-153f31589bdd', quantity: 1 },
@@ -79,7 +79,7 @@ describe('Order Routes: Add an Order', () => {
     request(app)
       .post('/orders')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send(badOrderDetails)
       .end((err, res) => {
         expect(res.statusCode).toBe(400);

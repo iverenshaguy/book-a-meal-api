@@ -7,7 +7,7 @@ import { tokens } from 'src/utils/test-utils/setup';
 import unAuthorized from 'src/utils/test-utils/unAuthorized';
 import request from 'supertest';
 
-const { emiolaToken } = tokens;
+const { jidennaToken } = tokens;
 
 const { newOrderDetails, badOrderDetails } = order;
 
@@ -19,7 +19,7 @@ describe('Order Routes: Modify an Order', () => {
     request(app)
       .post('/orders')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send(newOrderDetails)
       .end((err, res) => {
         newOrderId = res.body.id;
@@ -35,7 +35,7 @@ describe('Order Routes: Modify an Order', () => {
     request(app)
       .put(`/orders/${newOrderId}`)
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send({
         ...newOrderDetails,
         meals: [
@@ -59,7 +59,7 @@ describe('Order Routes: Modify an Order', () => {
     request(app)
       .put(`/orders/${newOrderId}`)
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send({ deliveryAddress: '5, Abakaliki Street, Lagos' })
       .end((err, res) => {
         expect(res.statusCode).toBe(200);
@@ -74,7 +74,7 @@ describe('Order Routes: Modify an Order', () => {
     request(app)
       .put(`/orders/${newOrderId}`)
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send({ deliveryPhoneNo: '08134567891', status: 'canceled' })
       .end((err, res) => {
         db.User.findOne({ where: { phoneNo: '08134567891' } }).then((user) => {
@@ -91,7 +91,7 @@ describe('Order Routes: Modify an Order', () => {
     request(app)
       .put('/orders/fb097bde-5959-45ff-8e21-51184fa60c25')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send(newOrderDetails)
       .end((err, res) => {
         expect(res.statusCode).toBe(400);
@@ -109,7 +109,7 @@ describe('Order Routes: Modify an Order', () => {
       request(app)
         .put('/orders/fb097bde-5959-45ff-8e21-51184fa60c25')
         .set('Accept', 'application/json')
-        .set('authorization', emiolaToken)
+        .set('authorization', jidennaToken)
         .send(newOrderDetails)
         .end((err, res) => {
           expect(res.statusCode).toBe(400);
@@ -130,7 +130,7 @@ describe('Order Routes: Modify an Order', () => {
       request(app)
         .put('/orders/fb097bde-5959-45ff-8e21-51184fa60c25')
         .set('Accept', 'application/json')
-        .set('authorization', emiolaToken)
+        .set('authorization', jidennaToken)
         .send(newOrderDetails)
         .end((err, res) => {
           expect(res.statusCode).toBe(400);
@@ -146,7 +146,7 @@ describe('Order Routes: Modify an Order', () => {
     request(app)
       .put(`/orders/${newOrderId}`)
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send({ ...badOrderDetails, date: '' })
       .end((err, res) => {
         expect(res.statusCode).toBe(400);
@@ -167,7 +167,7 @@ describe('Order Routes: Modify an Order', () => {
     request(app)
       .put(`/orders/${newOrderId}`)
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send()
       .end((err, res) => {
         expect(res.statusCode).toBe(400);
@@ -182,14 +182,14 @@ describe('Order Routes: Modify an Order', () => {
     type: 'orderId',
     method: 'put',
     url: '/orders/efbbf4ad-c4ae-4134-928d-b5ee305ed5396478',
-    token: emiolaToken,
+    token: jidennaToken,
     data: { ...newOrderDetails, menuId: newMenuId },
   });
 
   notFound({
     method: 'put',
     url: '/orders/9ce447be-ee46-424e-82b8-ae4160e795b4',
-    token: emiolaToken,
+    token: jidennaToken,
     data: {
       ...newOrderDetails,
       menuId: '8356954a-9a42-4616-8079-887a73455a7f',

@@ -8,7 +8,7 @@ describe('Password Routes', () => {
     it('should send reset password mail', (done) => {
       request.agent(app)
         .post('/auth/forgot_password')
-        .send({ email: 'emiola@olasanmi.com' })
+        .send({ email: 'jidenna@emodi.com' })
         .end((err, res) => {
           expect(res.statusCode).toBe(200);
           expect(res.body.message).toBe('A reset token has been sent to your email address');
@@ -47,10 +47,10 @@ describe('Password Routes', () => {
   });
   describe('Reset Password', () => {
     it('should reset password and sends reset password successful mail', (done) => {
-      db.User.findOne({ where: { email: 'emiola@olasanmi.com' } }).then((user) => {
+      db.User.findOne({ where: { email: 'jidenna@emodi.com' } }).then((user) => {
         request.agent(app)
           .post(`/auth/reset_password?token=${user.passwordResetToken}`)
-          .send({ password: 'emiolaolasanmi2' })
+          .send({ password: 'jidennaemodi2' })
           .end((err, res) => {
             expect(res.statusCode).toBe(200);
             expect(res.body.message).toBe('Password reset successful');
@@ -62,10 +62,10 @@ describe('Password Routes', () => {
     });
 
     it('should not reset password for invalid/expired token', (done) => {
-      db.User.findOne({ where: { email: 'emiola@olasanmi.com' } }).then((user) => {
+      db.User.findOne({ where: { email: 'jidenna@emodi.com' } }).then((user) => {
         request.agent(app)
           .post(`/auth/reset_password?token=${user.passwordResetToken}`)
-          .send({ password: 'emiolaolasanmi2' })
+          .send({ password: 'jidennaemodi2' })
           .end((err, res) => {
             expect(res.statusCode).toBe(400);
             expect(res.body.error).toBe('Password reset token is invalid or has expired');

@@ -18,9 +18,9 @@ const tokens = {
     role: 'customer',
   }, process.env.SECRET, { expiresIn: '48 hour' })}`,
 
-  emiolaToken: `Bearer ${jwt.sign({
+  jidennaToken: `Bearer ${jwt.sign({
     id: 'a09a5570-a3b2-4e21-94c3-5cf483dbd1ac',
-    email: 'emiola@olasanmi.com',
+    email: 'jidenna@emodi.com',
     role: 'customer',
   }, process.env.SECRET, { expiresIn: '48 hour' })}`,
 

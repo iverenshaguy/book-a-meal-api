@@ -4,7 +4,7 @@ import { order as mockData } from 'src/utils/test-utils/mockData';
 import { tokens } from 'src/utils/test-utils/setup';
 import request from 'supertest';
 
-const { emiolaToken } = tokens;
+const { jidennaToken } = tokens;
 
 const { newOrderDetails } = mockData;
 
@@ -15,7 +15,7 @@ describe('Order Routes: Modify an Order', () => {
     request(app)
       .post('/orders')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send(newOrderDetails)
       .end((err, res) => {
         setTimeout(() => {
@@ -39,7 +39,7 @@ describe('Order Routes: Modify an Order', () => {
     request(app)
       .post('/orders')
       .set('Accept', 'application/json')
-      .set('authorization', emiolaToken)
+      .set('authorization', jidennaToken)
       .send(newOrderDetails)
       .end(async (err, res) => {
         try {

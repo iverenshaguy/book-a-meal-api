@@ -3,7 +3,7 @@ import request from 'supertest'; // eslint-disable-line
 import app from 'src/app'; // eslint-disable-line
 import { tokens } from './setup';
 
-const { emiolaToken } = tokens;
+const { jidennaToken } = tokens;
 
 /**
  * @function notAdmin
@@ -17,7 +17,7 @@ const notAdmin = (method, url) => {
     it('should return 403 error for authorized user ie non admin or caterer', (done) => {
       request(app)[method](url)
         .set('Accept', 'application/json')
-        .set('authorization', emiolaToken)
+        .set('authorization', jidennaToken)
         .end((err, res) => {
           expect(res.statusCode).toBe(403);
           expect(res.body.error).toBe(
