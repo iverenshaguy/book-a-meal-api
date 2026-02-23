@@ -401,11 +401,10 @@ class OrderController {
    * @param {array} mealItems
    * @returns {object} JSON object
    */
-  static addMealsToOrder(order, mealItems) {
-    return mealItems.reduce(
-      (chain, item) => chain.then(() => order.addMeal(item.mealId, { through: { quantity: item.quantity } })),
-      Promise.resolve(),
-    );
+  static async addMealsToOrder(order, mealItems) {
+    for (const item of mealItems) {
+      await order.addMeal(item.mealId, { through: { quantity: item.quantity } }); // eslint-disable-line no-await-in-loop
+    }
   }
 
   /**

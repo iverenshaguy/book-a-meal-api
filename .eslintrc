@@ -56,7 +56,8 @@
           "ClassDeclaration": true
         }
       }
-    ]
+    ],
+    "no-restricted-syntax": 0
   },
   "parser": "babel-eslint"
 }
