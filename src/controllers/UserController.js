@@ -2,9 +2,9 @@
 import bcrypt from 'bcrypt';
 import randomString from 'random-string';
 import { Op } from 'sequelize';
-import Authorization from '../middlewares/Authorization';
-import models from '../models';
-import Mailer from '../utils/Mailer';
+import Authorization from 'src/middlewares/Authorization';
+import models from 'src/models';
+import Mailer from 'src/utils/Mailer';
 
 /**
  * @exports

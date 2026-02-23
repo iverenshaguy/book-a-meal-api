@@ -1,5 +1,5 @@
 import { check } from 'express-validator/check';
-import notEmpty from '../helpers/notEmpty';
+import notEmpty from 'src/helpers/notEmpty';
 
 export default {
   createMeal: [

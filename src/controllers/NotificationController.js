@@ -1,7 +1,7 @@
-import moment from 'moment';
 import { Op } from 'sequelize';
-import models from '../models';
-import Pagination from '../utils/Pagination';
+import models from 'src/models';
+import moment from 'src/utils/moment';
+import Pagination from 'src/utils/Pagination';
 
 /**
  * @exports
@@ -17,9 +17,12 @@ class NotificationController {
    * Generated automatically when some actions are taken
    */
   static async create(messageBody) {
-    await models.Notification.create({
-      ...messageBody
-    }, { include: [models.User, models.Menu, models.Order] });
+    await models.Notification.create(
+      {
+        ...messageBody,
+      },
+      { include: [models.User, models.Menu, models.Order] },
+    );
   }
 
   /**
@@ -36,19 +39,23 @@ class NotificationController {
     const paginate = new Pagination(req.query.page, req.query.limit);
     const { limit, offset } = paginate.getQueryMetadata();
 
-    const where = role === 'caterer'
-      ? { userId }
-      : { menuId: { [Op.not]: null } };
+    const where =
+      role === 'caterer' ? { userId } : { menuId: { [Op.not]: null } };
 
     const notifData = await models.Notification.findAndCountAll({
-      where, order: [['createdAt', 'DESC']], limit, offset
+      where,
+      order: [['createdAt', 'DESC']],
+      limit,
+      offset,
     });
 
-    const notifications = notifData.rows
-      .map(order => NotificationController.getNotifObject(order, role));
+    const notifications = notifData.rows.map((order) =>
+      NotificationController.getNotifObject(order, role),
+    );
 
     return res.status(200).json({
-      notifications, metadata: paginate.getPageMetadata(notifData.count, '/notifications')
+      notifications,
+      metadata: paginate.getPageMetadata(notifData.count, '/notifications'),
     });
   }
 
@@ -61,16 +68,14 @@ class NotificationController {
    * @return {object} Notification Object
    */
   static getNotifObject(notification, type) {
-    const {
-      notifId, message, menuId, orderId, createdAt
-    } = notification;
+    const { notifId, message, menuId, orderId, createdAt } = notification;
 
     return {
       id: notifId,
       message,
       menuId: type === 'customer' ? menuId : undefined,
       orderId: type === 'caterer' ? orderId : undefined,
-      createdAt: moment(createdAt).format()
+      createdAt: moment(createdAt).format(),
     };
   }
 }

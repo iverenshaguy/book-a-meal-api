@@ -1,5 +1,5 @@
 import NotificationEventHandler from './NotificationEventHandler';
-import mapCaterersOrder from '../helpers/mapCaterersOrder';
+import mapCaterersOrder from 'src/helpers/mapCaterersOrder';
 
 let updateOrder;
 

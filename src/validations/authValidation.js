@@ -1,7 +1,7 @@
 import validator from 'validator';
 import { check } from 'express-validator/check';
-import notEmpty from '../helpers/notEmpty';
-import unacceptedField from '../helpers/unacceptedField';
+import notEmpty from 'src/helpers/notEmpty';
+import unacceptedField from 'src/helpers/unacceptedField';
 
 export default {
   register: [

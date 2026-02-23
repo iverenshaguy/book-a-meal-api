@@ -1,9 +1,9 @@
-import moment from 'moment';
+import moment from 'src/utils/moment';
 import { Op } from 'sequelize';
-import models from '../models';
-import errors from '../../lib/errors.json';
-import NotificationEventEmitter from '../eventEmitters/NotificationEventEmitter';
-import Pagination from '../utils/Pagination';
+import models from 'src/models';
+import errors from 'src/lib/errors.json';
+import NotificationEventEmitter from 'src/eventEmitters/NotificationEventEmitter';
+import Pagination from 'src/utils/Pagination';
 
 /**
  * @exports

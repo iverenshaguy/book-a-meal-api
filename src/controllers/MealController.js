@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
-import models from '../models';
-import errors from '../../lib/errors.json';
-import Pagination from '../utils/Pagination';
+import models from 'src/models';
+import errors from 'src/lib/errors.json';
+import Pagination from 'src/utils/Pagination';
 
 /**
  * @exports

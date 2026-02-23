@@ -1,10 +1,10 @@
 import express from 'express';
-import MenuController from '../controllers/MenuController';
-import asyncWrapper from '../helpers/asyncWrapper';
-import menuValidation from '../validations/menuValidation';
-import Authorization from '../middlewares/Authorization';
-import ValidationHandler from '../middlewares/ValidationHandler';
-import TrimValues from '../middlewares/TrimValues';
+import MenuController from 'src/controllers/MenuController';
+import asyncWrapper from 'src/helpers/asyncWrapper';
+import menuValidation from 'src/validations/menuValidation';
+import Authorization from 'src/middlewares/Authorization';
+import ValidationHandler from 'src/middlewares/ValidationHandler';
+import TrimValues from 'src/middlewares/TrimValues';
 
 const menuRoutes = express.Router();
 const authorization = new Authorization('caterer');

@@ -4,7 +4,7 @@ import Sequelize from 'sequelize';
 import fs from 'fs';
 import path from 'path';
 
-import { config, url } from '../sequelize';
+import { config, url } from 'src/sequelize';
 
 const basename = path.basename(__filename);
 const sequelize = new Sequelize(url, config);

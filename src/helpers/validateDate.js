@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'src/utils/moment';
 
 /**
  * Function to check if date is valid

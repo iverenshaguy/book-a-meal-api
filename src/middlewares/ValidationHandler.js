@@ -1,7 +1,7 @@
-import moment from 'moment';
 import { validationResult } from 'express-validator/check';
 import { matchedData } from 'express-validator/filter';
-import messages from '../../lib/errors.json';
+import messages from 'src/lib/errors.json';
+import moment from 'src/utils/moment';
 
 /**
  * @exports
@@ -35,15 +35,22 @@ class ValidationHandler {
    * @returns {(function|object)} Function next() or JSON object
    */
   static isShopOpen(req, res, next) {
-    const opening = moment({ hour: process.env.OPENING_HOUR, minute: process.env.OPENING_MINUTE });
-    const closing = moment({ hour: process.env.CLOSING_HOUR, minute: process.env.CLOSING_MINUTE });
+    const now = moment();
+    const opening = moment({
+      hour: process.env.OPENING_HOUR,
+      minute: process.env.OPENING_MINUTE,
+    });
+    const closing = moment({
+      hour: process.env.CLOSING_HOUR,
+      minute: process.env.CLOSING_MINUTE,
+    });
     const midnight = moment('12:00 AM', 'h:mma');
     const oneAM = moment('1:00 AM', 'h:mma');
 
     if (
-      moment().isBefore(opening)
-      || moment().isAfter(closing)
-      || moment().isBetween(midnight, oneAM)
+      now.isBefore(opening) ||
+      now.isAfter(closing) ||
+      now.isBetween(midnight, oneAM)
     ) {
       return res.status(200).json({ message: messages.shopClosed });
     }
