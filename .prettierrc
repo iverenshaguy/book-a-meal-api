@@ -4,9 +4,11 @@
   "plugins": ["@ianvs/prettier-plugin-sort-imports"],
   "importOrder": [
     "^node:(.*)$",
+    "^@nestjs/(.*)$",
     "",
     "<THIRD_PARTY_MODULES>",
     "",
     "^[.]"
-  ]
+  ],
+  "importOrderParserPlugins": ["typescript"]
 }
