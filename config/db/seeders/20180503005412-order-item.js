@@ -1,17 +1,20 @@
-import moment from 'moment';
+import moment from 'src/utils/moment';
+
+const currentDay = moment().format('YYYY-MM-DD');
+const inAppTimezone = (value) =>
+  moment(value, 'YYYY-MM-DDTHH:mm:ss.SSS').format();
 
 export default {
-  up: queryInterface => queryInterface.bulkInsert(
-    'OrderItems',
-    [
+  up: (queryInterface) =>
+    queryInterface.bulkInsert('OrderItems', [
       {
         id: 1,
         mealId: '46ced7aa-eed5-4462-b2c0-153f31589bdd',
         orderId: 'fb097bde-5959-45ff-8e21-51184fa60c25',
         quantity: 2,
         delivered: true,
-        createdAt: '2018-04-06T00:47:03.687Z',
-        updatedAt: '2018-04-06T00:47:03.687Z'
+        createdAt: inAppTimezone('2018-04-06T00:47:03.687'),
+        updatedAt: inAppTimezone('2018-04-06T00:47:03.687'),
       },
       {
         id: 2,
@@ -19,8 +22,8 @@ export default {
         orderId: 'fb097bde-5959-45ff-8e21-51184fa60c25',
         quantity: 1,
         delivered: true,
-        createdAt: '2018-04-06T00:47:03.687Z',
-        updatedAt: '2018-04-06T00:47:03.687Z'
+        createdAt: inAppTimezone('2018-04-06T00:47:03.687'),
+        updatedAt: inAppTimezone('2018-04-06T00:47:03.687'),
       },
       {
         id: 3,
@@ -28,8 +31,8 @@ export default {
         orderId: 'fb097bde-5959-45ff-8e21-51184fa60c25',
         quantity: 2,
         delivered: true,
-        createdAt: '2018-04-06T00:47:03.687Z',
-        updatedAt: '2018-04-06T00:47:03.687Z'
+        createdAt: inAppTimezone('2018-04-06T00:47:03.687'),
+        updatedAt: inAppTimezone('2018-04-06T00:47:03.687'),
       },
       {
         id: 4,
@@ -37,8 +40,8 @@ export default {
         orderId: 'ce228787-f939-40a0-bfd3-6607ca8d2e53',
         quantity: 2,
         delivered: true,
-        createdAt: '2018-05-06T00:47:03.687Z',
-        updatedAt: '2018-05-06T00:47:03.687Z'
+        createdAt: inAppTimezone('2018-05-06T00:47:03.687'),
+        updatedAt: inAppTimezone('2018-05-06T00:47:03.687'),
       },
       {
         id: 5,
@@ -46,8 +49,8 @@ export default {
         orderId: 'ce228787-f939-40a0-bfd3-6607ca8d2e53',
         quantity: 2,
         delivered: true,
-        createdAt: '2018-05-06T00:47:03.687Z',
-        updatedAt: '2018-05-06T00:47:03.687Z'
+        createdAt: inAppTimezone('2018-05-06T00:47:03.687'),
+        updatedAt: inAppTimezone('2018-05-06T00:47:03.687'),
       },
       {
         id: 6,
@@ -55,8 +58,8 @@ export default {
         orderId: '58228787-f939-40a0-bfd3-6607ca8d2e53',
         quantity: 2,
         delivered: true,
-        createdAt: `${moment().format('YYYY-MM-DD')}T00:47:03.687Z`,
-        updatedAt: `${moment().format('YYYY-MM-DD')}T00:47:03.687Z`
+        createdAt: inAppTimezone(`${currentDay}T00:47:03.687`),
+        updatedAt: inAppTimezone(`${currentDay}T00:47:03.687`),
       },
       {
         id: 7,
@@ -64,8 +67,8 @@ export default {
         orderId: 'be228787-f939-40a0-bfd3-3607ca8d2e53',
         quantity: 2,
         delivered: false,
-        createdAt: `${moment().format('YYYY-MM-DD')}T00:47:03.687Z`,
-        updatedAt: `${moment().format('YYYY-MM-DD')}T00:47:03.687Z`
+        createdAt: inAppTimezone(`${currentDay}T00:47:03.687`),
+        updatedAt: inAppTimezone(`${currentDay}T00:47:03.687`),
       },
       {
         id: 8,
@@ -73,8 +76,8 @@ export default {
         orderId: 'be228787-f939-40a0-bfd3-3607ca8d2e53',
         quantity: 2,
         delivered: false,
-        createdAt: `${moment().format('YYYY-MM-DD')}T00:47:03.687Z`,
-        updatedAt: `${moment().format('YYYY-MM-DD')}T00:47:03.687Z`
+        createdAt: inAppTimezone(`${currentDay}T00:47:03.687`),
+        updatedAt: inAppTimezone(`${currentDay}T00:47:03.687`),
       },
       {
         id: 9,
@@ -82,8 +85,8 @@ export default {
         orderId: '97bde787-f939-40a0-bfd3-3607ca8d2e53',
         quantity: 2,
         delivered: false,
-        createdAt: `${moment().format('YYYY-MM-DD')}T11:47:03.687Z`,
-        updatedAt: `${moment().format('YYYY-MM-DD')}T11:47:03.687Z`
+        createdAt: inAppTimezone(`${currentDay}T11:47:03.687`),
+        updatedAt: inAppTimezone(`${currentDay}T11:47:03.687`),
       },
       {
         id: 10,
@@ -91,8 +94,8 @@ export default {
         orderId: '97bde787-f939-40a0-bfd3-3607ca8d2e53',
         quantity: 2,
         delivered: false,
-        createdAt: `${moment().format('YYYY-MM-DD')}T11:47:03.687Z`,
-        updatedAt: `${moment().format('YYYY-MM-DD')}T11:47:03.687Z`
+        createdAt: inAppTimezone(`${currentDay}T11:47:03.687`),
+        updatedAt: inAppTimezone(`${currentDay}T11:47:03.687`),
       },
       {
         id: 11,
@@ -100,8 +103,8 @@ export default {
         orderId: 'f939e787-f939-40a0-bfd3-3607ca8d2e53',
         quantity: 2,
         delivered: false,
-        createdAt: `${moment().format('YYYY-MM-DD')}T13:47:03.687Z`,
-        updatedAt: `${moment().format('YYYY-MM-DD')}T13:47:03.687Z`
+        createdAt: inAppTimezone(`${currentDay}T13:47:03.687`),
+        updatedAt: inAppTimezone(`${currentDay}T13:47:03.687`),
       },
       {
         id: 12,
@@ -109,11 +112,10 @@ export default {
         orderId: 'f939e787-f939-40a0-bfd3-3607ca8d2e53',
         quantity: 2,
         delivered: false,
-        createdAt: `${moment().format('YYYY-MM-DD')}T13:47:03.687Z`,
-        updatedAt: `${moment().format('YYYY-MM-DD')}T13:47:03.687Z`
+        createdAt: inAppTimezone(`${currentDay}T13:47:03.687`),
+        updatedAt: inAppTimezone(`${currentDay}T13:47:03.687`),
       },
-    ]
-  ),
+    ]),
 
-  down: queryInterface => queryInterface.bulkDelete('OrderItems', null, {})
+  down: (queryInterface) => queryInterface.bulkDelete('OrderItems', null, {}),
 };
