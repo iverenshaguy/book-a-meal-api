@@ -9,7 +9,7 @@
     "node": ">=16"
   },
   "scripts": {
-    "build": "babel --root-mode upward ./src -d ./dist --copy-files",
+    "build": "rimraf dist && babel --root-mode upward ./src -d ./dist --copy-files --no-copy-ignored",
     "db:ensure:test": "NODE_ENV=test node ./scripts/ensure-test-db.js",
     "db:migrate": "npm run sequelize-cli:es6 db:migrate",
     "db:migrate:undo": "npm run sequelize-cli:es6 db:migrate:undo:all",

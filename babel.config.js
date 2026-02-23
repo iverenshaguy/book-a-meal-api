@@ -1,0 +1,36 @@
+module.exports = {
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          node: 'current',
+        },
+      },
+    ],
+  ],
+  plugins: [
+    '@babel/plugin-proposal-object-rest-spread',
+    '@babel/plugin-proposal-export-namespace-from',
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-syntax-dynamic-import',
+    '@babel/plugin-proposal-throw-expressions',
+    '@babel/plugin-transform-runtime',
+    'add-module-exports',
+    [
+      'module-resolver',
+      {
+        root: ['./'],
+        alias: {
+          src: './src',
+        },
+      },
+    ],
+  ],
+  env: {
+    jsdom: {
+      plugins: [],
+    },
+  },
+  ignore: process.env.NODE_ENV === 'test' ? [] : ['**/__tests__/**', '**/*.test.js'],
+};
