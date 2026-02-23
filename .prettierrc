@@ -7,9 +7,6 @@
     "",
     "<THIRD_PARTY_MODULES>",
     "",
-    "^@nestjs/(.*)$",
-    "",
     "^[.]"
-  ],
-  "importOrderParserPlugins": ["typescript"]
+  ]
 }

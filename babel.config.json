@@ -22,16 +22,12 @@
       {
         "root": ["./"],
         "alias": {
-          "@server": "./packages/server",
-          "@client": "./packages/client"
+          "src": "./src"
         }
       }
     ]
   ],
   "env": {
-    "test": {
-      "plugins": ["istanbul"]
-    },
     "jsdom": {
       "plugins": []
     }

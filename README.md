@@ -1,8 +1,4 @@
-# [Book A Meal API](https://book-a-meal-prod.herokuapp.com)
-
-[![Build Status](https://travis-ci.org/iverenshaguy/book-a-meal-server.svg?branch=develop)](https://travis-ci.org/iverenshaguy/book-a-meal-server)
-[![Coverage Status](https://coveralls.io/repos/github/iverenshaguy/book-a-meal-server/badge.svg?branch=develop)](https://coveralls.io/github/iverenshaguy/book-a-meal-server?branch=develop)
-[![Maintainability](https://api.codeclimate.com/v1/badges/2b2015d4694466056ffb/maintainability)](https://codeclimate.com/github/iverenshaguy/book-a-meal-server/maintainability)
+# Book A Meal API
 
 This serves the Book a Meal client application
 
@@ -22,24 +18,22 @@ This serves the Book a Meal client application
 
 ### Project management
 
-This project was previously managed with Pivotal Tracker. Pivotal Tracker has been discontinued; stories and planning will be tracked elsewhere.
+This project is managed in Linear: [Book A Meal API board](https://linear.app/iveren-personal/project/book-a-meal-api-cf1246cb842b/issues?layout=board&ordering=priority&grouping=workflowState&subGrouping=none&showCompletedIssues=all&showSubIssues=true&showTriageIssues=true).
 
 ### API Deployment
 
-API is deployed at [https://book-a-meal-prod.herokuapp.com/api/v1](https://book-a-meal-prod.herokuapp.com/api/v1)
+API is deployed at [https://book-a-meal-prod.herokuapp.com](https://book-a-meal-prod.herokuapp.com)
 
 ### Documentation
 
-Documentation is hosted at [https://book-a-meal-prod.herokuapp.com/api/v1/docs](https://book-a-meal-prod.herokuapp.com/api/v1/docs)
+Documentation is hosted at [https://book-a-meal-prod.herokuapp.com](https://book-a-meal-prod.herokuapp.com)
 
 ## Technologies
 
 - [NodeJS](https://nodejs.org/) - Runtime Environment
-- [ExpressJs](https://expressjs.com/) - Web Application Framework (V1)
-- [NestJS](https://docs.nestjs.com/) - Framework for building efficient, scalable Node.js server-side applications (v2)
+- [ExpressJs](https://expressjs.com/) - Web Application Framework
 - [PostgreSQL](https://www.postgresql.org/) - Object-Relational Database System
 - [Sequelize](http://docs.sequelizejs.com/) - Promise-based ORM for Node.js v4 and up
-- [Typescript](https://www.typescriptlang.org/) - Extends JavaScript by adding types.
 
 ### Supporting Packages
 
@@ -51,24 +45,10 @@ Documentation is hosted at [https://book-a-meal-prod.herokuapp.com/api/v1/docs](
 
 - [Babel](https://eslint.org/) - Compiler for Next Generation JavaScript
 
-#### Bundler
-
-- [Webpack](https://webpack.js.org/) - Javascript Tool for Bundling Assests
-
 #### Test Tools
 
-- [Mocha](https://mochajs.org/) - JavaScript Test Framework for API Tests (Backend)
-- [Chai](http://chaijs.com/) - TDD/BDD Assertion Library for Node
-- [Supertest](https://github.com/visionmedia/supertest) - Super-agent driven
-  library for testing node.js HTTP servers
-- [Istanbul(nyc)](https://istanbul.js.org/) - Code Coverage Generator
-- [Jest](https://jestjs.io/) - Javascript Testing Platform to test JavaScript code
-
-## Versions
-
-This is version 2 and it is currently in active development.
-
-Version 1 can be found [here](https://github.com/iverenshaguy/book-a-meal/tree/version-1-react-redux-rest-express).
+- [Jest](https://jestjs.io/) - JavaScript Test Framework
+- [Supertest](https://github.com/visionmedia/supertest) - Super-agent driven library for testing node.js HTTP servers
 
 ## Features Implemented
 
@@ -146,7 +126,7 @@ This will:
 - **Current branch** (API built from your working branch):
 
   ```bash
-  yarn docker:up:current
+  yarn docker:up
   ```
 
   Starts API (port 8000), Caddy (HTTPS on 443), and Postgres (5432). Use [https://api.book-a-meal.local](https://api.book-a-meal.local).
@@ -154,7 +134,7 @@ This will:
 - **Stable API from `master`** (e.g. while developing the frontend):
 
   ```bash
-  yarn docker:up
+  yarn docker:master
   ```
 
   This checks out `master`, builds and runs the API from that branch, then restores your branch when you stop. It may stash and pop local changes.
@@ -183,19 +163,37 @@ Password: `app` (change in production or use key-based auth).
 
 - [Postman](https://getpostman.com/) - API Toolchain
 
+#### Test environment file (`.env.test`)
+
+Automated tests load `.env.test` when `NODE_ENV=test`/`e2e`.
+
+- Create a local `.env.test` file at the project root.
+- Add test-only database credentials and app secrets there.
+- Keep `.env` for development/runtime values.
+
+Minimum required keys:
+
+```env
+NODE_ENV=test
+DATABASE_URL=postgresql://<user>:<password>@localhost:5432/book_a_meal_test
+DB_USERNAME=<user>
+DB_PASSWORD=<password>
+DB_NAME=book_a_meal_test
+DB_HOST=localhost
+SECRET=<jwt_secret>
+```
+
+Notes:
+
+- `.env.test` is ignored by git.
+- If you run Postgres via Docker on host port `5433`, update `DATABASE_URL` accordingly.
+
 #### Testing with Postman
 
 - After installing as shown above
 - Navigate to [localhost:8000](http://localhost:8000/) in
   [Postman](https://getpostman.com/) to access the application
-- Use the [API Documentation](https://book-a-meal-prod.herokuapp.com/api/v1/docs) to access the endpoints available
-
-#### Testing with Coverage Data
-
-- After installing as shown
-- Run `yarn test`
-- This will lint code, run test and display coverage data as generated by
-  Istanbul's [nyc](https://github.com/istanbuljs/nyc) and Jest
+- Use the [API Documentation](https://book-a-meal-prod.herokuapp.com) to access the endpoints available
 
 ## Using the Live App
 
@@ -221,7 +219,7 @@ This will allow you to set a menu for the day if no menu is available.
 
 - Fork the repository
 - Make your contributions
-- Write Test Cases for your contribution with at least **80%** coverage
+- Write Test Cases for your contribution
 - Create a pull request against the develop branch
 
 ## FAQs
@@ -240,7 +238,7 @@ This will allow you to set a menu for the day if no menu is available.
 
 - Does the application have an API?
 
-  - Yes, the application has an API with a well documented reference that can be viewed [here](https://book-a-meal-prod.herokuapp.com/api/v1/docs)
+  - Yes, the application has an API with a well documented reference that can be viewed [here](https://book-a-meal-prod.herokuapp.com)
 
 - Is the application licensed ?
 

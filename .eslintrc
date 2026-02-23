@@ -3,31 +3,23 @@
   "extends": [
     "airbnb-base/legacy",
     "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:import/warnings",
+    "prettier"
   ],
   "env": {
     "node": true,
-    "browser": true,
     "es6": true,
-    "mocha": true,
     "jest": true
   },
   "settings": {
     "import/resolver": {
       "babel-module": {
-        "@server": "./packages/server",
-        "@client": "./packages/client"
+        "root": ["./"],
+        "alias": {
+          "src": "./src"
+        }
       }
     }
-  },
-  "globals": {
-    "shallow": true,
-    "mount": true,
-    "expect": true,
-    "render": true,
-    "toJson": true,
-    "rrcMock": true,
-    "mocksdk": true
   },
   "rules": {
     "one-var": 0,
@@ -39,6 +31,7 @@
     "import/named": 0,
     "curly": ["error", "multi-line"],
     "import/no-unresolved": "off",
+    "no-unexpected-multiline": "off",
     "no-shadow": [
       "error",
       {
