@@ -1,0 +1,46 @@
+# Book A Meal API - Production Dockerfile
+# Multi-stage: builder compiles the app, runner is a clean minimal image.
+#
+# Usage (via docker-compose.prod.yml):
+#   docker-compose -f docker-compose.prod.yml up -d
+#
+# Or directly:
+#   docker build -f Dockerfile.prod -t book-a-meal-api .
+#   docker run -p 8000:8000 --env-file .env.prod book-a-meal-api
+
+# ---- Builder Stage ----
+FROM node:16-alpine AS builder
+
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
+
+COPY . .
+RUN yarn build
+
+# ---- Production Stage ----
+FROM node:16-alpine
+
+WORKDIR /app
+
+# Non-root user for security
+RUN addgroup -S appgroup && adduser -S app -G appgroup
+
+# Copy dependencies from builder (includes babel-node needed for ES6 migrations)
+COPY --from=builder /app/node_modules ./node_modules
+
+# Copy compiled app and runtime-required configs
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/config ./config
+COPY package.json yarn.lock babel.config.json ./
+
+COPY docker/entrypoint.prod.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh && chown -R app:appgroup /app /entrypoint.sh
+
+USER app
+
+EXPOSE 8000
+ENV NODE_ENV=production
+
+ENTRYPOINT ["/entrypoint.sh"]
