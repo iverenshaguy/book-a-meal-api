@@ -21,15 +21,17 @@ class OrderEventHandler {
   static startOrderProcess(order, userId) {
     clearTimeout(updateOrder);
 
-    updateOrder = setTimeout(() => order.reload().then(() => {
-      if (order.status !== 'canceled') {
-        order.update({ status: 'pending' }).then(async () => {
-          const mappedOrder = await mapCaterersOrder(order);
+    updateOrder = setTimeout(() => order.reload()
+      .then(() => {
+        if (order.status !== 'canceled') {
+          order.update({ status: 'pending' }).then(async () => {
+            const mappedOrder = await mapCaterersOrder(order);
 
-          return NotificationEventHandler.catererOrder(mappedOrder, userId);
-        });
-      }
-    }), process.env.EXPIRY);
+            return NotificationEventHandler.catererOrder(mappedOrder, userId);
+          });
+        }
+      })
+      .catch(() => {}), process.env.EXPIRY);
   }
 
   /**
@@ -40,7 +42,7 @@ class OrderEventHandler {
    * @returns {void}
    */
   static async markOrderAsDelivered(order) {
-    order.reload();
+    await order.reload().catch(() => {});
 
     await order.getMeals().then(async (meals) => {
       let delivered = true;
