@@ -1,8 +1,8 @@
 /* eslint-disable import/no-cycle */
 import jwt from 'jsonwebtoken';
-import errors from '../../lib/errors.json';
-import models from '../models';
-import UserController from '../controllers/UserController';
+import errors from 'src/lib/errors.json';
+import models from 'src/models';
+import UserController from 'src/controllers/UserController';
 
 /**
  * @exports
@@ -90,6 +90,10 @@ class Authorization {
         }
 
         return res.status(401).json({ error: 'Failed to authenticate token' });
+      }
+
+      if (!decoded || !decoded.email) {
+        return res.status(401).json({ error: errors['401'] });
       }
 
       const foundUser = await models.User.findOne({ where: { email: decoded.email } });

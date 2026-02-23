@@ -1,6 +1,6 @@
-import models from '../models';
-import NotificationController from '../controllers/NotificationController';
-import Mailer from '../utils/Mailer';
+import models from 'src/models';
+import NotificationController from 'src/controllers/NotificationController';
+import Mailer from 'src/utils/Mailer';
 
 /**
  * NotificationEventHandler Event Handlers

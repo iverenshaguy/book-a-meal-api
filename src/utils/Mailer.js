@@ -1,10 +1,10 @@
 import nodemailer from 'nodemailer';
-import models from '../models';
-import newMenu from '../emailTemplates/newMenu';
-import newOrder from '../emailTemplates/newOrder';
-import orderDelivery from '../emailTemplates/orderDelivery';
-import passwordReset from '../emailTemplates/passwordReset';
-import passwordResetSuccess from '../emailTemplates/passwordResetSuccess';
+import models from 'src/models';
+import newMenu from 'src/emailTemplates/newMenu';
+import newOrder from 'src/emailTemplates/newOrder';
+import orderDelivery from 'src/emailTemplates/orderDelivery';
+import passwordReset from 'src/emailTemplates/passwordReset';
+import passwordResetSuccess from 'src/emailTemplates/passwordResetSuccess';
 
 const url = process.env.BASE_URL;
 

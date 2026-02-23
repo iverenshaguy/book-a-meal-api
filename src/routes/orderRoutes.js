@@ -1,10 +1,10 @@
 import express from 'express';
-import OrderController from '../controllers/OrderController';
-import asyncWrapper from '../helpers/asyncWrapper';
-import orderValidation from '../validations/orderValidation';
-import Authorization from '../middlewares/Authorization';
-import ValidationHandler from '../middlewares/ValidationHandler';
-import TrimValues from '../middlewares/TrimValues';
+import OrderController from 'src/controllers/OrderController';
+import asyncWrapper from 'src/helpers/asyncWrapper';
+import orderValidation from 'src/validations/orderValidation';
+import Authorization from 'src/middlewares/Authorization';
+import ValidationHandler from 'src/middlewares/ValidationHandler';
+import TrimValues from 'src/middlewares/TrimValues';
 
 const orderRoutes = express.Router();
 const userAuth = new Authorization('customer').authorizeRole;

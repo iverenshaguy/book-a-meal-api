@@ -1,10 +1,10 @@
 import { check } from 'express-validator/check';
-import notEmpty from '../helpers/notEmpty';
-import validateDate from '../helpers/validateDate';
-import checkOrderMeals from '../helpers/checkOrderMeals';
-import checkOrderMealsId from '../helpers/checkOrderMealsId';
-import checkOrderQuantity from '../helpers/checkOrderQuantity';
-import isValidOrderItems from '../helpers/isValidOrderItems';
+import notEmpty from 'src/helpers/notEmpty';
+import validateDate from 'src/helpers/validateDate';
+import checkOrderMeals from 'src/helpers/checkOrderMeals';
+import checkOrderMealsId from 'src/helpers/checkOrderMealsId';
+import checkOrderQuantity from 'src/helpers/checkOrderQuantity';
+import isValidOrderItems from 'src/helpers/isValidOrderItems';
 
 export default {
   createOrder: [

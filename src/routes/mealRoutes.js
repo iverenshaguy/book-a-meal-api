@@ -1,10 +1,10 @@
 import express from 'express';
-import MealController from '../controllers/MealController';
-import asyncWrapper from '../helpers/asyncWrapper';
-import mealValidation from '../validations/mealValidation';
-import Authorization from '../middlewares/Authorization';
-import ValidationHandler from '../middlewares/ValidationHandler';
-import TrimValues from '../middlewares/TrimValues';
+import MealController from 'src/controllers/MealController';
+import asyncWrapper from 'src/helpers/asyncWrapper';
+import mealValidation from 'src/validations/mealValidation';
+import Authorization from 'src/middlewares/Authorization';
+import ValidationHandler from 'src/middlewares/ValidationHandler';
+import TrimValues from 'src/middlewares/TrimValues';
 
 const mealRoutes = express.Router();
 const authorization = new Authorization('caterer');

@@ -1,23 +1,27 @@
-import { config as getEnv } from 'dotenv';
 import { resolve } from 'path';
 
-getEnv({ path: resolve(__dirname, '../.env') });
+import { config as getEnv } from 'dotenv';
 
 const environment = process.env.NODE_ENV || 'development';
-const devMode = (environment !== 'production');
+const envFilePath = environment === 'test' || environment === 'e2e'
+  ? resolve(process.cwd(), '.env.test')
+  : resolve(process.cwd(), '.env');
+getEnv({ path: envFilePath });
+
+const devMode = environment !== 'production';
 
 const databaseUrls = {
   development: process.env.DATABASE_URL,
   staging: process.env.DATABASE_URL,
-  test: process.env.DATABASE_TEST_URL,
-  e2e: process.env.DATABASE_TEST_URL,
-  production: process.env.DATABASE_URL
+  test: process.env.DATABASE_URL,
+  e2e: process.env.DATABASE_URL,
+  production: process.env.DATABASE_URL,
 };
 
 export const url = databaseUrls[environment];
 export const config = {
   dialect: 'postgres',
-  logging: devMode ? log => log : false
+  logging: devMode ? (log) => log : false,
 };
 
 // Sequelize CLI (migrations) expects env keys; models use url/config
@@ -25,26 +29,26 @@ module.exports = {
   development: {
     use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
-    logging: devMode
+    logging: devMode,
   },
   test: {
-    use_env_variable: 'DATABASE_TEST_URL',
+    use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
-    logging: false
+    logging: false,
   },
   staging: {
     use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
-    logging: devMode
+    logging: devMode,
   },
   production: {
     use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
-    logging: false
+    logging: false,
   },
   url: databaseUrls[environment],
   config: {
     dialect: 'postgres',
-    logging: devMode ? log => log : false
-  }
+    logging: devMode ? (log) => log : false,
+  },
 };

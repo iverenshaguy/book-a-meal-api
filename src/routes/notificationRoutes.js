@@ -1,7 +1,7 @@
 import express from 'express';
-import NotificationController from '../controllers/NotificationController';
-import asyncWrapper from '../helpers/asyncWrapper';
-import Authorization from '../middlewares/Authorization';
+import NotificationController from 'src/controllers/NotificationController';
+import asyncWrapper from 'src/helpers/asyncWrapper';
+import Authorization from 'src/middlewares/Authorization';
 
 const notificationRoutes = express.Router();
 

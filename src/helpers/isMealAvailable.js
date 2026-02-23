@@ -1,5 +1,5 @@
-import moment from 'moment';
-import models from '../models';
+import moment from 'src/utils/moment';
+import models from 'src/models';
 /**
  * Function to check if menu for the day passed in contains meal
  * @param {string} mealId

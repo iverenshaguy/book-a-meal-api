@@ -1,10 +1,10 @@
 import express from 'express';
-import asyncWrapper from '../helpers/asyncWrapper';
-import authValidation from '../validations/authValidation';
-import Authorization from '../middlewares/Authorization';
-import UserController from '../controllers/UserController';
-import ValidationHandler from '../middlewares/ValidationHandler';
-import TrimValues from '../middlewares/TrimValues';
+import asyncWrapper from 'src/helpers/asyncWrapper';
+import authValidation from 'src/validations/authValidation';
+import Authorization from 'src/middlewares/Authorization';
+import UserController from 'src/controllers/UserController';
+import ValidationHandler from 'src/middlewares/ValidationHandler';
+import TrimValues from 'src/middlewares/TrimValues';
 
 const authRoutes = express.Router();
 const validation = [ValidationHandler.validate, TrimValues.trim, ValidationHandler.isEmptyReq];

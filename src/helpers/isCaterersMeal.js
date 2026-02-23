@@ -1,4 +1,4 @@
-import models from '../models';
+import models from 'src/models';
 
 /**
  * Function to check if meal belongs to the user adding it to menu
