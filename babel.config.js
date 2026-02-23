@@ -32,5 +32,5 @@ module.exports = {
       plugins: [],
     },
   },
-  ignore: process.env.NODE_ENV === 'test' ? [] : ['**/__tests__/**', '**/*.test.js'],
+  ignore: process.env.BABEL_ENV === 'build' ? ['**/__tests__/**', '**/*.test.js'] : [],
 };
