@@ -37,7 +37,7 @@ yarn db:seed            # Run all seeders
 
 # Docker (local dev)
 yarn docker:up          # Run stack from current branch
-yarn docker:master      # Run stack from master branch
+yarn docker:main        # Run stack from main branch
 yarn docker:prod:up     # Production deployment
 yarn docker:prod:migrate # Run migrations in prod container
 ```
@@ -121,6 +121,6 @@ Configured via Husky v3 (`package.json` `husky.hooks`):
 
 ### Deployment
 
-- CI runs on GitHub Actions (push to master, or any PR against master): tests against PostgreSQL 14
+- CI runs on GitHub Actions (push to main, or any PR against main): tests against PostgreSQL 14
 - Deploy runs via Render on push to a `release/**` branch (requires `RENDER_DEPLOY_HOOK_URL` secret)
 - Production config: `render.yaml` (Render) or `docker-compose.prod.yml` + Caddy for self-hosted VPS

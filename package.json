@@ -17,7 +17,7 @@
     "db:setup": "npm run db:migrate:undo && npm run db:migrate && npm run db:seed",
     "db:setup:test": "NODE_ENV=test npm run db:ensure:test && NODE_ENV=test npm run db:migrate:undo && NODE_ENV=test npm run db:migrate",
     "docker:setup": "./scripts/docker-setup.sh",
-    "docker:master": "./scripts/docker-up.sh",
+    "docker:main": "./scripts/docker-up.sh",
     "docker:up": "./scripts/docker-up.sh --current",
     "docker:prod:down": "docker-compose -f docker-compose.prod.yml down",
     "docker:prod:migrate": "docker-compose -f docker-compose.prod.yml run --rm api sh -c \"yarn sequelize-cli:es6 db:migrate\"",
