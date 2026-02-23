@@ -27,7 +27,7 @@ services:
     # Migrations run once on each deploy before the app starts serving traffic
     startCommand: yarn sequelize-cli:es6 db:migrate && node ./dist/app.js
 
-    healthCheckPath: /api/
+    healthCheckPath: /
 
     # Deploys are triggered by GitHub Actions (after tests pass), not by git push
     autoDeploy: false
@@ -36,7 +36,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: 10000          # Render's default port for web services
+        value: 10000 # Render's default port for web services
 
       # Set these in the Render dashboard — never commit real values
       - key: DATABASE_URL

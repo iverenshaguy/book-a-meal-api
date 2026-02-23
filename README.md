@@ -22,11 +22,11 @@ This project is managed in Linear: [Book A Meal API board](https://linear.app/iv
 
 ### API Deployment
 
-API is deployed at [https://book-a-meal-prod.herokuapp.com](https://book-a-meal-prod.herokuapp.com)
+API is deployed at [https://book-a-meal-api-dwri.onrender.com](https://book-a-meal-api-dwri.onrender.com)
 
 ### Documentation
 
-Documentation is hosted at [https://book-a-meal-prod.herokuapp.com](https://book-a-meal-prod.herokuapp.com)
+Documentation is hosted at [https://book-a-meal-api-dwri.onrender.com](https://book-a-meal-api-dwri.onrender.com)
 
 ## Technologies
 
@@ -193,11 +193,11 @@ Notes:
 - After installing as shown above
 - Navigate to [localhost:8000](http://localhost:8000/) in
   [Postman](https://getpostman.com/) to access the application
-- Use the [API Documentation](https://book-a-meal-prod.herokuapp.com) to access the endpoints available
+- Use the [API Documentation](https://book-a-meal-api-dwri.onrender.com) to access the endpoints available
 
 ## Using the Live App
 
-The live application is hosted at [https://book-a-meal-prod.herokuapp.com](https://book-a-meal-prod.herokuapp.com).
+The live application is hosted at [https://book-a-meal-api-dwri.onrender.com](https://book-a-meal-api-dwri.onrender.com).
 
 The Menu for each day varies and must be set by any of the registered caterers.
 
@@ -238,7 +238,7 @@ This will allow you to set a menu for the day if no menu is available.
 
 - Does the application have an API?
 
-  - Yes, the application has an API with a well documented reference that can be viewed [here](https://book-a-meal-prod.herokuapp.com)
+  - Yes, the application has an API with a well documented reference that can be viewed [here](https://book-a-meal-api-dwri.onrender.com)
 
 - Is the application licensed ?
 
