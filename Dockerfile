@@ -17,8 +17,8 @@ RUN yarn install --frozen-lockfile --production=false
 # Copy source and config
 COPY . .
 
-# Build Express v1 only (Babel compiles src/ -> dist/)
-RUN yarn build:v1
+# Build app (Babel compiles src/ -> dist/)
+RUN yarn build
 
 # SSH: create app user (password: app, change in production)
 RUN adduser -D -s /bin/sh app \
