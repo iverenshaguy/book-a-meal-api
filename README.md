@@ -131,13 +131,13 @@ This will:
 
   Starts API (port 8000), Caddy (HTTPS on 443), and Postgres (5432). Use [https://api.book-a-meal.local](https://api.book-a-meal.local).
 
-- **Stable API from `master`** (e.g. while developing the frontend):
+- **Stable API from `main`** (e.g. while developing the frontend):
 
   ```bash
-  yarn docker:master
+  yarn docker:main
   ```
 
-  This checks out `master`, builds and runs the API from that branch, then restores your branch when you stop. It may stash and pop local changes.
+  This checks out `main`, builds and runs the API from that branch, then restores your branch when you stop. It may stash and pop local changes.
 
 #### External database
 

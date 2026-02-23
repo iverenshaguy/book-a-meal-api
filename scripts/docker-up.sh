@@ -31,7 +31,7 @@ if [ "$CURRENT" = 1 ]; then
 else
   PREV=$(git branch --show-current)
   (git stash push -m 'temp-docker-up' 2>/dev/null || true)
-  git checkout master
+  git checkout main
   run_compose
   git checkout "$PREV"
   git stash list | grep -q 'temp-docker-up' && git stash pop || true

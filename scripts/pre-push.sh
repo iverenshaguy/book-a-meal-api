@@ -6,8 +6,8 @@ UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
 if [ -n "$UPSTREAM" ]; then
   CHANGED=$(git diff --name-only "$UPSTREAM"...HEAD | grep -E '\.(js|jsx)$')
 else
-  # New branch with no upstream yet — compare with the merge base of master
-  BASE=$(git merge-base HEAD master 2>/dev/null || git merge-base HEAD main 2>/dev/null)
+  # New branch with no upstream yet — compare with the merge base of main
+  BASE=$(git merge-base HEAD main 2>/dev/null)
   if [ -n "$BASE" ]; then
     CHANGED=$(git diff --name-only "$BASE"...HEAD | grep -E '\.(js|jsx)$')
   else
