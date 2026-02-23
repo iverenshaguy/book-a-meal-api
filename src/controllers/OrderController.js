@@ -36,9 +36,7 @@ class OrderController {
 
     const newOrder = await models.Order.create(orderBody, { include: [{ model: models.User, as: 'customer' }] })
       .then(async (order) => {
-        const promises = OrderController.addMealsToOrder(order, meals);
-
-        await Promise.all(promises);
+        await OrderController.addMealsToOrder(order, meals);
         await OrderController.getOrderMeals(order);
         await Users.updateCustomerContact(userId, { deliveryAddress, deliveryPhoneNo });
 
@@ -67,8 +65,7 @@ class OrderController {
       if (meals) {
         await order.setMeals([]);
 
-        const promises = OrderController.addMealsToOrder(order, meals);
-        await Promise.all(promises);
+        await OrderController.addMealsToOrder(order, meals);
       }
 
       await OrderController.getOrderMeals(order);
@@ -405,9 +402,10 @@ class OrderController {
    * @returns {object} JSON object
    */
   static addMealsToOrder(order, mealItems) {
-    return mealItems.map(item => order.addMeal(item.mealId, {
-      through: { quantity: item.quantity }
-    }).then(() => order));
+    return mealItems.reduce(
+      (chain, item) => chain.then(() => order.addMeal(item.mealId, { through: { quantity: item.quantity } })),
+      Promise.resolve(),
+    );
   }
 
   /**
